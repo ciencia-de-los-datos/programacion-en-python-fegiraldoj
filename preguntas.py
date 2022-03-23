@@ -11,17 +11,24 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
-
 def pregunta_01():
-    """
+    """ 
     Retorne la suma de la segunda columna.
 
     Rta/
     214
 
     """
-    return
+    with open("data.csv", "r") as file:
+        list_data = file.readlines()    
+
+    suma = 0
+
+    for values in list_data:
+        values_tmp = values.split()
+        suma += int(values_tmp[1])
+
+    return suma
 
 
 def pregunta_02():
@@ -39,7 +46,23 @@ def pregunta_02():
     ]
 
     """
-    return
+
+    with open("data.csv", "r") as file:
+        list_data = file.readlines()
+
+    column_a_list = []
+    for values in list_data:
+        values_tmp = values.split()
+        column_a_list.append(values_tmp[0])
+
+    column_a_distinct_list = list(dict.fromkeys(column_a_list))
+    column_a_distinct_list.sort()
+    values_occurence_list = []
+
+    for column_a_value in column_a_distinct_list:
+        values_occurence_list.append((column_a_value, column_a_list.count(column_a_value)))
+
+    return values_occurence_list
 
 
 def pregunta_03():
