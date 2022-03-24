@@ -238,9 +238,6 @@ def pregunta_06():
 
     return result_list
 
-
-
-
 def pregunta_07():
     """
     Retorne una lista de tuplas que asocien las columnas 1 y 2. Cada tupla contiene un
