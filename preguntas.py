@@ -165,8 +165,29 @@ def pregunta_05():
     ]
 
     """
-    return
+    with open("data.csv", "r") as file:
+        list_data = file.readlines()
 
+    column_a_list = []
+    column_b_list = []
+    for values in list_data:
+        values_tmp = values.split()
+        column_a_list.append(values_tmp[0])
+        column_b_list.append(int(values_tmp[1]))
+
+    columns_ab_list = list(zip(column_a_list,column_b_list))
+
+    max_dict = {}
+    min_dict = {}
+    result_list = []
+    for col_a, col_b in columns_ab_list:
+        max_dict[col_a] = col_b if col_a not in max_dict else max_dict[col_a] if max_dict[col_a] > col_b else col_b
+        min_dict[col_a] = col_b if col_a not in min_dict else min_dict[col_a] if min_dict[col_a] < col_b else col_b
+
+    result_list = list(zip(max_dict.keys(), max_dict.values(), min_dict.values()))
+    result_list.sort(key=lambda i:i[0])
+    
+    return result_list
 
 def pregunta_06():
     """
@@ -190,12 +211,39 @@ def pregunta_06():
     ]
 
     """
-    return
+    with open("data.csv", "r") as file:
+        list_data = file.readlines()
+
+    column_e_list = []
+    for values in list_data:
+        values_tmp = values.split()
+        [column_e_list.append(x) for x in values_tmp[4].split(",")]
+
+    column_e_keys = []
+    column_e_values = []
+    [[column_e_keys.append(x), column_e_values.append(int(y))] for s in column_e_list for (x, y) in [s.split(":")]]
+
+    column_e_list = list(zip(column_e_keys, column_e_values))
+
+    max_dict = {}
+    min_dict = {}
+    result_list = []
+
+    for key, value in column_e_list:
+        max_dict[key] = value if key not in max_dict else max_dict[key] if max_dict[key] > value else value
+        min_dict[key] = value if key not in min_dict else min_dict[key] if min_dict[key] < value else value
+
+    result_list = list(zip(min_dict.keys(), min_dict.values(), max_dict.values()))
+    result_list.sort(key=lambda i:i[0])
+
+    return result_list
+
+
 
 
 def pregunta_07():
     """
-    Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
+    Retorne una lista de tuplas que asocien las columnas 1 y 2. Cada tupla contiene un
     valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
     a dicho valor de la columna 2.
 
