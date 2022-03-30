@@ -13,6 +13,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 import csv
 from collections import Counter
+from unittest import result
 
 
 
@@ -330,7 +331,7 @@ def pregunta_08():
         for y in data:
             if x == y[1] and y[0] not in letter_list:
                 letter_list.append(y[0])
-                
+
         letter_list.sort()
         tupla = (int(x),letter_list.copy())
         return_list.append(tupla)
@@ -358,8 +359,24 @@ def pregunta_09():
         "jjj": 18,
     }
 
-    """
-    return
+    """    
+    file = open("data.csv", "r")
+
+    data = []
+
+    for row in csv.reader(file, delimiter="\t"):
+        [data.append(x) for x in row[4].split(",")]
+
+
+    column_e_keys = []
+    column_e_values = []
+    [[column_e_keys.append(x), column_e_values.append(int(y))] for s in data for (x, y) in [s.split(":")]]
+
+    column_e_keys.sort()
+    return_list = dict(Counter(column_e_keys))
+   
+    return return_list
+
 
 
 def pregunta_10():
