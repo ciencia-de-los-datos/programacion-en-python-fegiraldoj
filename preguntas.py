@@ -283,7 +283,7 @@ def pregunta_07():
             if x == y[1]:
                 letter_list.append(y[0])
         
-        tupla = (x,letter_list.copy())
+        tupla = (int(x),letter_list.copy())
         return_list.append(tupla)
         letter_list.clear()
         
