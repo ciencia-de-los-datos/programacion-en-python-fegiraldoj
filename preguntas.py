@@ -458,5 +458,21 @@ def pregunta_12():
         'E': 324
     }
 
-    """
-    return
+    """  
+
+    file = open("data.csv", "r")
+
+    data = []
+
+    for row in csv.reader(file, delimiter="\t"):
+        [data.append([row[0], int(x.split(":")[1])]) for x in row[4].split(",")]
+
+
+    result_dict = {}
+
+    for key, value in data:
+        result_dict[key] = value if key not in result_dict else result_dict[key] + value
+
+    result_dict = OrderedDict(sorted(result_dict.items()))
+
+    return dict(result_dict)
