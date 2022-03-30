@@ -396,9 +396,18 @@ def pregunta_10():
     ]
 
 
-    """
-    return
+    """    
+    file = open("data.csv", "r")
 
+    data = []
+
+    for row in csv.reader(file, delimiter="\t"):
+        len_col_d = len(row[3].split(","))
+        len_col_e = len(row[4].split(","))
+        tuple = (row[0], len_col_d, len_col_e)
+        data.append(tuple)
+
+    return data
 
 def pregunta_11():
     """
