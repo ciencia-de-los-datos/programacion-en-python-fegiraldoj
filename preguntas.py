@@ -12,7 +12,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 import csv
-from collections import Counter
+from collections import Counter, OrderedDict
 from unittest import result
 
 
@@ -427,8 +427,22 @@ def pregunta_11():
 
 
     """
-    return
+    
+    file = open("data.csv", "r")
 
+    data = []
+
+    for row in csv.reader(file, delimiter="\t"):
+        [data.append([x, int(row[1])]) for x in row[3].split(",")]
+
+    result_dict = {}
+
+    for key, value in data:
+        result_dict[key] = value if key not in result_dict else result_dict[key] + value
+
+    result_dict = OrderedDict(sorted(result_dict.items()))
+
+    return dict(result_dict)
 
 def pregunta_12():
     """
